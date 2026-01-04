@@ -2,16 +2,20 @@ public class PaymentService {
 
     public boolean processPayment(Payment payment, PaymentProcessor processor) {
 
-        System.out.println("Starting payment processing...");
+        try {
+            payment.setStatus(PaymentStatus.PROCESSING);
 
-        payment.setStatus(PaymentStatus.PROCESSING);
+            boolean result = processor.processPayment(payment);
 
-        boolean result = processor.processPayment(payment);
+            if (!result) {
+                payment.setStatus(PaymentStatus.FAILED);
+            }
 
-        if (!result) {
-            payment.setStatus(PaymentStatus.FAILED);
+            return result;
+
+        } catch (InvalidPaymentStateException ex) {
+            System.out.println("Payment error: " + ex.getMessage());
+            return false;
         }
-
-        return result;
     }
 }

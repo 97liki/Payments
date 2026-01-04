@@ -19,8 +19,8 @@ public class Payment {
     public void setStatus(PaymentStatus newStatus) {
 
         if (this.status == PaymentStatus.SUCCESS || this.status == PaymentStatus.FAILED) {
-            System.out.println("Payment is already completed. Status cannot be changed.");
-            return;
+            throw new InvalidPaymentStateException(
+                    "Cannot change status from " + this.status);
         }
 
         this.status = newStatus;
