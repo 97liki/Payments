@@ -16,7 +16,14 @@ public class Payment {
         System.out.println("Status: " + status);
     }
 
-    public void setStatus(PaymentStatus status) {
-        this.status = status;
+    public void setStatus(PaymentStatus newStatus) {
+
+        if (this.status == PaymentStatus.SUCCESS || this.status == PaymentStatus.FAILED) {
+            System.out.println("Payment is already completed. Status cannot be changed.");
+            return;
+        }
+
+        this.status = newStatus;
     }
+
 }
