@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class PaymentService {
 
     private PaymentRepository repository = new PaymentRepository();
@@ -28,7 +30,11 @@ public class PaymentService {
         }
     }
 
-    public Payment getPayment(String paymentId) {
-        return repository.findById(paymentId);
+    public List<Payment> getAllPayments() {
+        return repository.findAll();
+    }
+
+    public List<Payment> getPaymentsByStatus(PaymentStatus status) {
+        return repository.findByStatus(status);
     }
 }

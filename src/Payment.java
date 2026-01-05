@@ -37,4 +37,8 @@ public class Payment {
         return idempotencyKey;
     }
 
+    public PaymentStatus getStatus() {
+        return status;
+    }
+
 }
