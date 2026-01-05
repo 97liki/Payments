@@ -5,7 +5,7 @@ public class PaymentService {
 
     private PaymentRepository repository = new PaymentRepository();
 
-    public boolean processPayment(Payment payment, PaymentProcessor processor) {
+    public synchronized boolean processPayment(Payment payment, PaymentProcessor processor) {
 
         if (repository.isAlreadyProcessed(payment.getIdempotencyKey())) {
             System.out.println("Duplicate payment request detected. Skipping processing.");
