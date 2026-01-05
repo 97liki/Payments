@@ -1,4 +1,4 @@
-public class Payment {
+public class Payment implements Comparable<Payment> {
 
     private String paymentId;
     private double amount;
@@ -39,6 +39,11 @@ public class Payment {
 
     public PaymentStatus getStatus() {
         return status;
+    }
+
+    @Override
+    public int compareTo(Payment other) {
+        return Double.compare(this.amount, other.amount);
     }
 
 }

@@ -22,5 +22,16 @@ public class Main {
         for (Payment p : service.getPaymentsByStatus(PaymentStatus.SUCCESS)) {
             p.printDetails();
         }
+
+        System.out.println("\nPAYMENTS SORTED BY AMOUNT:");
+        for (Payment p : service.getPaymentsSortedByAmount()) {
+            p.printDetails();
+        }
+
+        System.out.println("\nPAYMENTS SORTED BY ID:");
+        for (Payment p : service.getPaymentsSortedById()) {
+            p.printDetails();
+        }
+
     }
 }

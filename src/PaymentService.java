@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.List;
 
 public class PaymentService {
@@ -36,5 +37,17 @@ public class PaymentService {
 
     public List<Payment> getPaymentsByStatus(PaymentStatus status) {
         return repository.findByStatus(status);
+    }
+
+    public List<Payment> getPaymentsSortedByAmount() {
+        List<Payment> payments = repository.findAll();
+        Collections.sort(payments); // uses compareTo()
+        return payments;
+    }
+
+    public List<Payment> getPaymentsSortedById() {
+        List<Payment> payments = repository.findAll();
+        Collections.sort(payments, new PaymentIdComparator());
+        return payments;
     }
 }
