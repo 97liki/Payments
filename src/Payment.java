@@ -3,10 +3,12 @@ public class Payment {
     private String paymentId;
     private double amount;
     private PaymentStatus status;
+    private String idempotencyKey;
 
-    public Payment(String paymentId, double amount) {
+    public Payment(String paymentId, double amount, String idempotencyKey) {
         this.paymentId = paymentId;
         this.amount = amount;
+        this.idempotencyKey = idempotencyKey;
         this.status = PaymentStatus.CREATED;
     }
 
@@ -14,6 +16,7 @@ public class Payment {
         System.out.println("Payment ID: " + paymentId);
         System.out.println("Amount: " + amount);
         System.out.println("Status: " + status);
+        System.out.println("Idempotency Key: " + idempotencyKey);
     }
 
     public void setStatus(PaymentStatus newStatus) {
@@ -28,6 +31,10 @@ public class Payment {
 
     public String getPaymentId() {
         return paymentId;
+    }
+
+    public String getIdempotencyKey() {
+        return idempotencyKey;
     }
 
 }

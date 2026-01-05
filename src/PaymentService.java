@@ -4,6 +4,11 @@ public class PaymentService {
 
     public boolean processPayment(Payment payment, PaymentProcessor processor) {
 
+        if (repository.isAlreadyProcessed(payment.getIdempotencyKey())) {
+            System.out.println("Duplicate payment request detected. Skipping processing.");
+            return true;
+        }
+
         try {
             payment.setStatus(PaymentStatus.PROCESSING);
 
