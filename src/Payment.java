@@ -26,4 +26,8 @@ public class Payment {
         this.status = newStatus;
     }
 
+    public String getPaymentId() {
+        return paymentId;
+    }
+
 }

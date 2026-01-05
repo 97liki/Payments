@@ -1,5 +1,7 @@
 public class PaymentService {
 
+    private PaymentRepository repository = new PaymentRepository();
+
     public boolean processPayment(Payment payment, PaymentProcessor processor) {
 
         try {
@@ -11,11 +13,17 @@ public class PaymentService {
                 payment.setStatus(PaymentStatus.FAILED);
             }
 
+            repository.save(payment); // 👈 store payment
+
             return result;
 
         } catch (InvalidPaymentStateException ex) {
             System.out.println("Payment error: " + ex.getMessage());
             return false;
         }
+    }
+
+    public Payment getPayment(String paymentId) {
+        return repository.findById(paymentId);
     }
 }
